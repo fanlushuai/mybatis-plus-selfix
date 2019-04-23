@@ -55,7 +55,27 @@
         generator.setStrategy(strategy);
         generator.execute();
 
+## Maven
+    
+        <dependency>
+            <groupId>com.open</groupId>
+            <artifactId>mybatis-plus-generator-fix</artifactId>
+            <version>3.1.1.1.fix</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-engine-core</artifactId>
+            <version>2.1</version>
+        </dependency>
+
+        <repositories>
+            <repository>
+                <id>maven-repo</id>
+                <url>https://raw.githubusercontent.com/fanlushuai/maven-repo/master/</url>
+            </repository>
+        </repositories>
+    
 ## License
 
 MyBatis-Plus is under the Apache 2.0 license. See the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) file for details.
