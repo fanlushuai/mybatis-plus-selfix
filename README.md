@@ -48,7 +48,8 @@
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
         strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(true);
-                        strategy.setInclude("creditor,repayplan,scatterinvest,status,transact,transferproject,transferstatus,undertakeinfo,userinfo,t_user".split(","));
+        strategy.setInclude(("creditor,repayplan,scatterinvest,status,transact,transferproject," +
+                "transferstatus,undertakeinfo,userinfo,t_user").split(","));
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
         generator.setStrategy(strategy);
