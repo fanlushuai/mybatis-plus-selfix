@@ -137,7 +137,7 @@ public class AutoGenerator {
                 // 开启 ActiveRecord 模式
                 tableInfo.setImportPackages(Model.class.getCanonicalName());
             }
-            if (tableInfo.isConvert()) {
+            if (tableInfo.isConvert()|| config.getGlobalConfig().isAddAllTableName()) {
                 // 表注解
                 tableInfo.setImportPackages(TableName.class.getCanonicalName());
             }

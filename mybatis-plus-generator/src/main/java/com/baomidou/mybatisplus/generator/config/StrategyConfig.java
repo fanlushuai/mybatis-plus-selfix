@@ -16,7 +16,9 @@
 package com.baomidou.mybatisplus.generator.config;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.baomidou.mybatisplus.core.toolkit.ClassUtils;
@@ -40,6 +42,17 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class StrategyConfig {
+
+
+    private Map<String, String> tableNameEntityNameMap = new HashMap<>();
+
+    public void setTableNameEntityNameMap(Map<String, String> tableNameEntityNameMap) {
+        this.tableNameEntityNameMap = tableNameEntityNameMap;
+    }
+
+    public Map<String, String> getTableNameEntityNameMap() {
+        return tableNameEntityNameMap;
+    }
 
     /**
      * 是否大写命名

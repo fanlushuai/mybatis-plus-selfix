@@ -85,6 +85,17 @@ public class GlobalConfig {
      * 开启 baseColumnList
      */
     private boolean baseColumnList = false;
+
+    /**
+     * 添加所有表名
+     */
+    private boolean addAllTableName = false;
+
+    /**
+     * 添加所有字段名
+     */
+    private boolean addAllTableFileName = false;
+
     /**
      * 各层文件名称方式，例如： %sAction 生成 UserAction
      * %s 为占位符

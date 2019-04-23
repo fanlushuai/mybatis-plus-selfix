@@ -15,39 +15,26 @@
  */
 package com.baomidou.mybatisplus.generator.config.builder;
 
-import java.io.File;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
-import com.baomidou.mybatisplus.generator.config.ConstVal;
-import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
-import com.baomidou.mybatisplus.generator.config.GlobalConfig;
-import com.baomidou.mybatisplus.generator.config.IDbQuery;
-import com.baomidou.mybatisplus.generator.config.PackageConfig;
-import com.baomidou.mybatisplus.generator.config.StrategyConfig;
-import com.baomidou.mybatisplus.generator.config.TemplateConfig;
+import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.po.TableField;
 import com.baomidou.mybatisplus.generator.config.po.TableFill;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.querys.H2Query;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
+import java.io.File;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.*;
+
 /**
  * 配置汇总 传递给文件生成工具
- *
  * @author YangHu, tangguo, hubin
  * @since 2016-08-30
  */
@@ -57,55 +44,67 @@ public class ConfigBuilder {
      * 模板路径配置信息
      */
     private final TemplateConfig template;
+
     /**
      * 数据库配置
      */
     private final DataSourceConfig dataSourceConfig;
+
     /**
      * SQL连接
      */
     private Connection connection;
+
     /**
      * SQL语句类型
      */
     private IDbQuery dbQuery;
+
     private String superEntityClass;
+
     private String superMapperClass;
+
     /**
      * service超类定义
      */
     private String superServiceClass;
+
     private String superServiceImplClass;
+
     private String superControllerClass;
+
     /**
      * 数据库表信息
      */
     private List<TableInfo> tableInfoList;
+
     /**
      * 包配置详情
      */
     private Map<String, String> packageInfo;
+
     /**
      * 路径配置信息
      */
     private Map<String, String> pathInfo;
+
     /**
      * 策略配置
      */
     private StrategyConfig strategyConfig;
+
     /**
      * 全局配置信息
      */
     private GlobalConfig globalConfig;
+
     /**
      * 注入配置信息
      */
     private InjectionConfig injectionConfig;
 
-
     /**
      * 在构造器中处理配置
-     *
      * @param packageConfig    包配置
      * @param dataSourceConfig 数据源配置
      * @param strategyConfig   表配置
@@ -147,57 +146,46 @@ public class ConfigBuilder {
 
     /**
      * 所有包配置信息
-     *
      * @return 包配置
      */
     public Map<String, String> getPackageInfo() {
         return packageInfo;
     }
 
-
     /**
      * 所有路径配置
-     *
      * @return 路径配置
      */
     public Map<String, String> getPathInfo() {
         return pathInfo;
     }
 
-
     public String getSuperEntityClass() {
         return superEntityClass;
     }
-
 
     public String getSuperMapperClass() {
         return superMapperClass;
     }
 
-
     /**
      * 获取超类定义
-     *
      * @return 完整超类名称
      */
     public String getSuperServiceClass() {
         return superServiceClass;
     }
 
-
     public String getSuperServiceImplClass() {
         return superServiceImplClass;
     }
-
 
     public String getSuperControllerClass() {
         return superControllerClass;
     }
 
-
     /**
      * 表信息
-     *
      * @return 所有表信息
      */
     public List<TableInfo> getTableInfoList() {
@@ -209,10 +197,8 @@ public class ConfigBuilder {
         return this;
     }
 
-
     /**
      * 模板路径配置信息
-     *
      * @return 所以模板路径配置信息
      */
     public TemplateConfig getTemplate() {
@@ -223,10 +209,8 @@ public class ConfigBuilder {
 
     /**
      * 处理包配置
-     *
-     * @param template  TemplateConfig
-     * @param outputDir
-     * @param config    PackageConfig
+     * @param template TemplateConfig
+     * @param config   PackageConfig
      */
     private void handlerPackage(TemplateConfig template, String outputDir, PackageConfig config) {
         // 包信息
@@ -263,7 +247,6 @@ public class ConfigBuilder {
 
     /**
      * 处理数据源配置
-     *
      * @param config DataSourceConfig
      */
     private void handlerDataSource(DataSourceConfig config) {
@@ -271,10 +254,8 @@ public class ConfigBuilder {
         dbQuery = config.getDbQuery();
     }
 
-
     /**
      * 处理数据库表 加载数据库表、列、注释相关数据集
-     *
      * @param config StrategyConfig
      */
     private void handlerStrategy(StrategyConfig config) {
@@ -282,10 +263,8 @@ public class ConfigBuilder {
         tableInfoList = getTablesInfo(config);
     }
 
-
     /**
      * 处理superClassName,IdClassType,IdStrategy配置
-     *
      * @param config 策略配置
      */
     private void processTypes(StrategyConfig config) {
@@ -308,10 +287,8 @@ public class ConfigBuilder {
         superControllerClass = config.getSuperControllerClass();
     }
 
-
     /**
      * 处理表对应的类名称
-     *
      * @param tableList 表名称
      * @param strategy  命名策略
      * @param config    策略配置项
@@ -360,7 +337,6 @@ public class ConfigBuilder {
 
     /**
      * 检测导入包
-     *
      * @param tableInfo ignore
      */
     private void checkImportPackages(TableInfo tableInfo) {
@@ -384,7 +360,6 @@ public class ConfigBuilder {
             });
         }
     }
-
 
     /**
      * 获取所有的数据库表信息
@@ -501,10 +476,8 @@ public class ConfigBuilder {
         return processTable(includeTableList, config.getNaming(), config);
     }
 
-
     /**
      * 表名匹配
-     *
      * @param setTableName 设置表名
      * @param dbTableName  数据库表单
      * @return ignore
@@ -516,7 +489,6 @@ public class ConfigBuilder {
 
     /**
      * 将字段信息与表信息关联
-     *
      * @param tableInfo 表信息
      * @param strategy  命名策略
      * @return ignore
@@ -617,10 +589,8 @@ public class ConfigBuilder {
         return tableInfo;
     }
 
-
     /**
      * 连接路径字符串
-     *
      * @param parentDir   路径常量字符串
      * @param packageName 包名
      * @return 连接后的路径
@@ -636,10 +606,8 @@ public class ConfigBuilder {
         return parentDir + packageName;
     }
 
-
     /**
      * 连接父子包名
-     *
      * @param parent     父包名
      * @param subPackage 子包名
      * @return 连接后的包名
@@ -651,26 +619,16 @@ public class ConfigBuilder {
         return parent + StringPool.DOT + subPackage;
     }
 
-
     /**
      * 处理字段名称
-     *
      * @return 根据策略返回处理后的名称
      */
     private String processName(String name, NamingStrategy strategy) {
-        return processName(name, strategy, strategyConfig.getFieldPrefix());
+        return processNameCopy(name, strategy, strategyConfig.getFieldPrefix());
     }
 
+    private String processNameCopy(String name, NamingStrategy strategy, String[] prefix) {
 
-    /**
-     * 处理表/字段名称
-     *
-     * @param name ignore
-     * @param strategy ignore
-     * @param prefix ignore
-     * @return 根据策略返回处理后的名称
-     */
-    private String processName(String name, NamingStrategy strategy, String[] prefix) {
         boolean removePrefix = false;
         if (prefix != null && prefix.length != 0) {
             removePrefix = true;
@@ -694,33 +652,63 @@ public class ConfigBuilder {
         return propertyName;
     }
 
+    /**
+     * 处理表/字段名称
+     * @param name     ignore
+     * @param strategy ignore
+     * @param prefix   ignore
+     * @return 根据策略返回处理后的名称
+     */
+    private String processName(String name, NamingStrategy strategy, String[] prefix) {
+
+        if (StringUtils.checkValNotNull(strategyConfig.getTableNameEntityNameMap().get(name))) {
+            return strategyConfig.getTableNameEntityNameMap().get(name);
+        }
+
+        boolean removePrefix = false;
+        if (prefix != null && prefix.length != 0) {
+            removePrefix = true;
+        }
+        String propertyName;
+        if (removePrefix) {
+            if (strategy == NamingStrategy.underline_to_camel) {
+                // 删除前缀、下划线转驼峰
+                propertyName = NamingStrategy.removePrefixAndCamel(name, prefix);
+            } else {
+                // 删除前缀
+                propertyName = NamingStrategy.removePrefix(name, prefix);
+            }
+        } else if (strategy == NamingStrategy.underline_to_camel) {
+            // 下划线转驼峰
+            propertyName = NamingStrategy.underlineToCamel(name);
+        } else {
+            // 不处理
+            propertyName = name;
+        }
+        return propertyName;
+    }
 
     public StrategyConfig getStrategyConfig() {
         return strategyConfig;
     }
-
 
     public ConfigBuilder setStrategyConfig(StrategyConfig strategyConfig) {
         this.strategyConfig = strategyConfig;
         return this;
     }
 
-
     public GlobalConfig getGlobalConfig() {
         return globalConfig;
     }
-
 
     public ConfigBuilder setGlobalConfig(GlobalConfig globalConfig) {
         this.globalConfig = globalConfig;
         return this;
     }
 
-
     public InjectionConfig getInjectionConfig() {
         return injectionConfig;
     }
-
 
     public ConfigBuilder setInjectionConfig(InjectionConfig injectionConfig) {
         this.injectionConfig = injectionConfig;
