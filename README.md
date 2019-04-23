@@ -22,68 +22,38 @@
   </a>
 </p>
 
-## What is MyBatis-Plus?
+## 修改内容
+基于mybatis-plus-3.1.0
+增加复杂表名实体类映射。比如userinfo->UserInfo。原始的只能生成Userinfo。
+修改vm模板，修复格式错乱，调整格式。全局生成@TableName。全局生成@TableField。如果没有全局@TableNanme，复杂表名无法处理。
 
-[![Join the chat at https://gitter.im/baomidou/mybatis-plus](https://badges.gitter.im/baomidou/mybatis-plus.svg)](https://gitter.im/baomidou/mybatis-plus?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+## 使用例子
 
-MyBatis-Plus is an powerful enhanced toolkit of MyBatis for simplify development. This toolkit provides some efficient, useful, out-of-the-box features for MyBatis, use it can effectively save your development time.
+        //复杂表名，自定义实体类名
+        Map<String, String> tableEntityNameMap = new HashMap<>();
+        tableEntityNameMap.put("creditor", "creditor");
+        tableEntityNameMap.put("repayplan", "RepayPlan");
+        tableEntityNameMap.put("scatterinvest", "ScatterInvest");
+        tableEntityNameMap.put("transferproject", "TransferProject");
+        tableEntityNameMap.put("transferstatus", "TransferStatus");
+        tableEntityNameMap.put("undertakeinfo", "UndertakeInfo");
+        tableEntityNameMap.put("userinfo", "UserInfo");
+        tableEntityNameMap.put("t_user", "User");
 
-## Links
+        // 策略配置
+        StrategyConfig strategy = new StrategyConfig();
+        strategy.setTableNameEntityNameMap(tableEntityNameMap);
+        strategy.setNaming(NamingStrategy.underline_to_camel);
 
--   [Documentation](https://mybatis.plus)
--   [Samples](https://github.com/baomidou/mybatis-plus-samples.git)
--   [Showcase](https://github.com/baomidou/awosome-mybaits-plus)
+        strategy.setColumnNaming(NamingStrategy.underline_to_camel);
+        strategy.setEntityLombokModel(true);
+        strategy.setRestControllerStyle(true);
+                        strategy.setInclude("creditor,repayplan,scatterinvest,status,transact,transferproject,transferstatus,undertakeinfo,userinfo,t_user".split(","));
+        strategy.setControllerMappingHyphenStyle(true);
+        strategy.setTablePrefix(pc.getModuleName() + "_");
+        generator.setStrategy(strategy);
+        generator.execute();
 
-## Features
-
--   Fully compatible with MyBatis
--   Auto configuration on startup
--   Out-of-the-box interfaces for operate database
--   Powerful and flexible where condition wrapper
--   Multiple strategy to generate primary key
--   Lambda-style API
--   Almighty and highly customizable code generator
--   Automatic paging operation
--   SQL Injection defense
--   Support active record
--   Support pluggable custom interface
--   Build-in many useful extensions
-
-## Getting started
-
--   Add MyBatis-Plus dependency
-    -   Maven:
-        ```xml
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.1.0</version>
-        </dependency>
-        ```
-    -   Gradle
-        ```groovy
-        compile group: 'com.baomidou', name: 'mybatis-plus-boot-starter', version: '3.1.0'
-        ```
--   Modify mapper file extends BaseMapper interface
-
-    ```java
-    public interface UserMapper extends BaseMapper<User> {
-
-    }
-    ```
-
--   Use it
-    ``` java
-    List<User> userList = userMapper.selectList(
-            new QueryWrapper<User>()
-                    .lambda()
-                    .ge(User::getAge, 18)
-    );
-    ```
-    SQL executed
-    ``` sql
-    SELECT * FROM user WHERE age >= 18
-    ```
 
 ## License
 
