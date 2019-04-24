@@ -628,7 +628,6 @@ public class ConfigBuilder {
     }
 
     private String processNameCopy(String name, NamingStrategy strategy, String[] prefix) {
-
         boolean removePrefix = false;
         if (prefix != null && prefix.length != 0) {
             removePrefix = true;
@@ -648,6 +647,10 @@ public class ConfigBuilder {
         } else {
             // 不处理
             propertyName = name;
+        }
+        String finalPropertyName = propertyName;
+        if (dataSourceConfig.getDbKeyWords().stream().anyMatch(keyWord -> keyWord.compareToIgnoreCase(finalPropertyName) == 0)) {
+            propertyName = "`" + propertyName + "`";
         }
         return propertyName;
     }
@@ -684,6 +687,11 @@ public class ConfigBuilder {
         } else {
             // 不处理
             propertyName = name;
+        }
+
+        String finalPropertyName = propertyName;
+        if (dataSourceConfig.getDbKeyWords().stream().anyMatch(keyWord -> keyWord.compareToIgnoreCase(finalPropertyName) == 0)) {
+            propertyName = "`" + propertyName + "`";
         }
         return propertyName;
     }
