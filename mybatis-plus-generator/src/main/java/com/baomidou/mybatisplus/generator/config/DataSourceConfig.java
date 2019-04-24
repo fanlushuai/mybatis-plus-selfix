@@ -25,6 +25,8 @@ import lombok.experimental.Accessors;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 数据库配置
@@ -35,6 +37,9 @@ import java.sql.SQLException;
 @Data
 @Accessors(chain = true)
 public class DataSourceConfig {
+
+
+    private List<String> dbKeyWords=new ArrayList<>();
 
     /**
      * 数据库信息查询
