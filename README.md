@@ -24,8 +24,9 @@
 
 ## 修改内容
 基于mybatis-plus-3.1.0
-增加复杂表名实体类映射。比如userinfo->UserInfo。原始的只能生成Userinfo。
-修改vm模板，修复格式错乱，调整格式。全局生成@TableName。全局生成@TableField。如果没有全局@TableNanme，复杂表名无法处理。
+1、增加复杂表名实体类映射。比如userinfo->UserInfo。原始的只能生成Userinfo。
+2、修改vm模板，修复格式错乱，调整格式。全局生成@TableName。全局生成@TableField。如果没有全局@TableNanme，复杂表名无法处理。
+3、添加属性，使其支持自定义数据库关键字。对关键字进行显示转化。
 
 ## 使用例子
 
